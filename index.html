@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shri Ganeshay Namah Store</title>
+  <style>
+    *{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:#1b1b1b;color:#fff} 
+    header{height:90px;padding:15px 30px;display:flex;align-items:center;justify-content:space-between;background:#111;border-bottom:2px solid #c6a20b}
+    .brand{display:flex;align-items:center;gap:15px;font-size:22px;font-weight:bold;color:#ffd700}.brand img{width:150px;height:55px;object-fit:cover;border:2px solid #ffd700;border-radius:8px}
+    .cart{border:0;border-radius:25px;padding:12px 20px;background:#ffd700;color:#111;font-weight:bold;cursor:pointer}
+    main{max-width:1200px;margin:auto;padding:35px 20px} #search{width:min(450px,100%);padding:13px 20px;border:2px solid #c6a20b;border-radius:25px;background:#292929;color:#fff;margin-bottom:25px}
+    #grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}.product{background:#292929;border:1px solid #444;border-radius:18px;padding:20px;text-align:center;transition:.3s}.product:hover{transform:translateY(-5px);border-color:#c6a20b}
+    .product img{width:100%;height:190px;object-fit:contain;border-radius:12px;background:#f4eee3}.emoji{height:190px;font-size:70px;display:flex;align-items:center;justify-content:center}.product h3{margin:15px 0 8px}.description{color:#bbb;min-height:40px}.price{display:block;font-size:24px;font-weight:bold;color:#44d69c;margin:12px 0}
+    .add{width:100%;padding:12px;border:0;border-radius:10px;background:#c6a20b;color:#fff;font-size:16px;font-weight:bold;cursor:pointer}.add:hover{background:#e0bf23}
+    .drawer{position:fixed;right:-360px;top:0;width:min(350px,100%);height:100%;background:#292929;padding:25px;z-index:10;border-left:2px solid #c6a20b;transition:.4s}.drawer.open{right:0}.shade{display:none;position:fixed;inset:0;background:#000a;z-index:9}.shade.show{display:block}.drawer-row{display:flex;justify-content:space-between;border-bottom:1px solid #555;padding:12px 0}.drawer button.remove{border:0;border-radius:50%;cursor:pointer}.checkout,.close{width:100%;margin-top:10px;padding:12px;border:0;border-radius:8px;color:#fff;font-weight:bold;cursor:pointer}.checkout{background:#29b878}.close{background:#d94b4b}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand"><img src="image_1.png" alt="Ganpati Ji"><span>Shri Ganeshay Namah Store</span></div>
+    <button class="cart" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button>
+  </header>
+  <main>
+    <input id="search" type="text" placeholder="Search products..." oninput="render()">
+    <div id="grid"></div>
+  </main>
+  <aside id="drawer" class="drawer">
+    <h2>Your Cart</h2><div id="items"></div><h3>Total: ₹<span id="total">0</span></h3>
+    <button class="checkout" onclick="checkout()">Proceed to Checkout</button><button class="close" onclick="closeCart()">Close Cart</button>
+  </aside>
+  <div id="shade" class="shade" onclick="closeCart()"></div>
+  <script>
+    const products=[
+      {name:"Vegetable Push Chopper",price:499,description:"Easy manual vegetable chopper",image:"vegetable-push-chopper.svg"},
+      {name:"Premium Product",price:1299,description:"Quality catalogue item",icon:"📦"},
+      {name:"Smart Home Essential",price:899,description:"Practical everyday product",icon:"🏠"},
+      {name:"Daily Use Collection",price:599,description:"Great value selection",icon:"🛍️"},
+      {name:"Business Pack",price:2499,description:"Convenient business pack",icon:"🎁"},
+      {name:"Quality Choice",price:749,description:"Selected for quality",icon:"⭐"},
+      {name:"Fresh Arrival",price:1599,description:"Latest catalogue arrival",icon:"✨"},
+      {name:"Special Deal",price:999,description:"Special offer item",icon:"🏷️"},
+      {name:"Premium Collection",price:1899,description:"Premium selection",icon:"💎"}
+    ];
+    let cart=[];
+    function render(){
+      const q=document.getElementById("search").value.toLowerCase();
+      document.getElementById("grid").innerHTML=products.filter(p=>p.name.toLowerCase().includes(q)||p.description.toLowerCase().includes(q)).map(p=>`<article class="product"><div>${p.image?`<img src="${p.image}" alt="${p.name}">`:`<div class="emoji">${p.icon}</div>`}</div><h3>${p.name}</h3><p class="description">${p.description}</p><span class="price">₹${p.price.toLocaleString("en-IN")}</span><button class="add" onclick="add('${p.name}')">Add to Cart</button></article>`).join("");
+    }
+    function add(name){cart.push(products.find(p=>p.name===name));document.getElementById("count").textContent=cart.length;drawCart();}
+    function openCart(){document.getElementById("drawer").classList.add("open");document.getElementById("shade").classList.add("show");drawCart()}
+    function closeCart(){document.getElementById("drawer").classList.remove("open");document.getElementById("shade").classList.remove("show")}
+    function drawCart(){document.getElementById("items").innerHTML=cart.length?cart.map((p,i)=>`<div class="drawer-row"><span>${p.name}</span><span>₹${p.price}<button class="remove" onclick="removeItem(${i})">×</button></span></div>`).join(""):"<p>Your cart is empty.</p>";document.getElementById("total").textContent=cart.reduce((s,p)=>s+p.price,0).toLocaleString("en-IN")}
+    function removeItem(i){cart.splice(i,1);document.getElementById("count").textContent=cart.length;drawCart()}
+    function checkout(){alert(cart.length?"Checkout demo ready — payment gateway can be connected.":"Please add a product first.")}
+    render();
+  </script>
+</body>
+</html>
