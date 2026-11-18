@@ -5,310 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shri Ganeshay Namah Store - Premium Collection</title>
   <style>
-    /* Ekdum Premium Royal Background */
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(175deg, #1a1a1a 0%, #2d2d2d 50%, #404040 100%);
-      min-height: 100vh;
-      color: #e0e0e0;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      background: rgba(20, 20, 20, 0.95);
-      backdrop-filter: blur(15px);
-      box-shadow: 0 4px 25px rgba(0,0,0,0.5);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 2px solid #b59410;
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #ffd700;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-      letter-spacing: 1px;
-    }
-
-    .logo-container img {
-      width: 180px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 8px;
-      border: 2px solid #ffd700;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-    }
-
-    .cart-btn {
-      background: linear-gradient(45deg, #b59410, #ffd700);
-      color: #111;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 4px 15px rgba(181, 148, 16, 0.5);
-      font-size: 1.1rem;
-    }
-
-    .cart-btn:hover {
-      background: linear-gradient(45deg, #ffd700, #ffe066);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(181, 148, 16, 0.7);
-    }
-
-    #shop { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
-
-    #q {
-      padding: 14px 25px;
-      width: 100%;
-      max-width: 450px;
-      border: 2px solid #b59410;
-      border-radius: 30px;
-      outline: none;
-      box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);
-      font-size: 1.1rem;
-      background: #2a2a2a;
-      color: #fff;
-      margin-bottom: 30px;
-    }
-
-    #grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 25px;
-    }
-
-    .product {
-      background: #2a2a2a;
-      border: 1px solid #404040;
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .product:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 35px rgba(181, 148, 16, 0.15);
-      border-color: #b59410;
-    }
-
-    .pic {
-      height: 180px;
-      text-align: center;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .pic img {
-      width: 100%;
-      height: 180px;
-      object-fit: contain;
-      border-radius: 12px;
-      background: #f4eee3;
-    }
-
-    .pic-emoji { font-size: 3.5rem; }
-
-    .body h3 { margin: 0 0 10px 0; font-size: 1.3rem; color: #fff; }
-    .body p { margin: 0 0 15px 0; font-size: 0.95rem; color: #aaa; }
-
-    .price {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #34d399;
-      display: block;
-      margin-bottom: 15px;
-    }
-
-    .btn {
-      background: #b59410;
-      color: #fff;
-      border: none;
-      padding: 12px;
-      border-radius: 12px;
-      width: 100%;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s;
-      font-size: 1.1rem;
-    }
-
-    .btn:hover { background: #d4ae14; }
-
-    .drawer {
-      position: fixed;
-      right: -350px;
-      top: 0;
-      width: 350px;
-      height: 100%;
-      background: #2a2a2a;
-      transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: -10px 0 40px rgba(0,0,0,0.5);
-      padding: 25px;
-      z-index: 1000;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      border-left: 2px solid #b59410;
-    }
-
-    .drawer.open { right: 0; }
-
-    .shade {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(5px);
-      display: none;
-      z-index: 999;
-    }
-
-    .shade.show { display: block; }
-
-    #toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: #ffd700;
-      color: #111;
-      padding: 15px 30px;
-      border-radius: 30px;
-      opacity: 0;
-      transition: 0.4s;
-      pointer-events: none;
-      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-
-    #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-
-    @media (max-width: 600px) {
-      header { padding: 12px; flex-wrap: wrap; }
-      .logo-container { font-size: 1rem; }
-      .logo-container img { width: 90px; height: 42px; }
-      #shop { padding: 25px 14px; }
-    }
+    body{margin:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(175deg,#1a1a1a 0%,#2d2d2d 50%,#404040 100%);min-height:100vh;color:#e0e0e0}
+    header{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:rgba(20,20,20,.95);box-shadow:0 4px 25px #0008;position:sticky;top:0;z-index:100;border-bottom:2px solid #b59410}
+    .logo{display:flex;align-items:center;gap:15px;font-size:1.6rem;font-weight:bold;color:#ffd700;text-shadow:0 2px 5px #000;letter-spacing:1px}
+    .logo-mark{display:grid;place-items:center;width:60px;height:60px;border:2px solid #ffd700;border-radius:50%;background:#b59410;font-size:2.2rem}
+    .cart-btn{background:linear-gradient(45deg,#b59410,#ffd700);color:#111;border:0;padding:12px 24px;border-radius:30px;font-weight:bold;cursor:pointer;font-size:1.1rem}
+    #shop{padding:40px 20px;max-width:1200px;margin:auto}#q{padding:14px 25px;width:100%;max-width:450px;border:2px solid #b59410;border-radius:30px;outline:none;font-size:1.1rem;background:#2a2a2a;color:#fff;margin-bottom:30px}
+    #grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:25px}
+    .product{background:#2a2a2a;border:1px solid #404040;padding:25px;border-radius:20px;box-shadow:0 10px 30px #0005;display:flex;flex-direction:column;justify-content:space-between;transition:.3s}
+    .product:hover{transform:translateY(-8px);box-shadow:0 15px 35px #b5941026;border-color:#b59410}.pic{height:180px;text-align:center;margin-bottom:15px;display:flex;align-items:center;justify-content:center;font-size:3.5rem}.pic img{width:100%;height:180px;object-fit:contain;border-radius:12px;background:#f4eee3}
+    h3{margin:0 0 10px;font-size:1.3rem;color:#fff}.body p{margin:0 0 15px;font-size:.95rem;color:#aaa}.price{font-size:1.4rem;font-weight:bold;color:#34d399;display:block;margin-bottom:15px}
+    .btn{background:#b59410;color:#fff;border:0;padding:12px;border-radius:12px;width:100%;cursor:pointer;font-weight:600;font-size:1.1rem}.btn:hover{background:#d4ae14}
+    .drawer{position:fixed;right:-350px;top:0;width:350px;height:100%;background:#2a2a2a;transition:.4s;box-shadow:-10px 0 40px #0008;padding:25px;z-index:1000;box-sizing:border-box;display:flex;flex-direction:column;border-left:2px solid #b59410}.drawer.open{right:0}.shade{position:fixed;inset:0;background:#000b;display:none;z-index:999}.shade.show{display:block}
+    #toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#ffd700;color:#111;padding:15px 30px;border-radius:30px;opacity:0;transition:.4s;pointer-events:none;font-weight:bold;font-size:1.1rem}#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+    @media(max-width:600px){header{padding:12px}.logo{font-size:1rem}.logo-mark{width:42px;height:42px;font-size:1.5rem}.cart-btn{padding:10px 12px;font-size:.9rem}#shop{padding:25px 14px}}
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo-container">
-      <img src="image_1.png" alt="Ganpati Ji Premium">
-      <span>Shri Ganeshay Namah Store</span>
-    </div>
-    <div>
-      <button class="cart-btn" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button>
-    </div>
-  </header>
-
-  <div id="shop">
-    <input type="text" id="q" placeholder="Search Premium Products..." onkeyup="render()">
-    <div id="grid"></div>
-  </div>
-
-  <div id="drawer" class="drawer">
-    <h3>Your Cart</h3>
-    <div id="items" style="flex-grow: 1; overflow-y: auto; margin: 20px 0;"></div>
-    <p style="font-size: 1.2rem;"><b>Total: ₹<span id="total">0</span></b></p>
-    <button class="btn" onclick="checkout()" style="margin-bottom: 15px; background: #34d399;">Proceed to Checkout</button>
-    <button class="btn" onclick="closeCart()" style="background: #ef4444;">Close Cart</button>
-  </div>
-  <div id="shade" class="shade" onclick="closeCart()"></div>
-  <div id="toast"></div>
-
-  <script>
-    const products = [
-      ["Vegetable Push Chopper", "New", 499, "vegetable-push-chopper.svg", "Easy manual vegetable chopper"],
-      ["Premium Product", "Featured", 1299, "📦", "Quality catalogue item"],
-      ["Smart Home Essential", "New", 899, "🏠", "Practical everyday product"],
-      ["Daily Use Collection", "Offers", 599, "🛍️", "Great value selection"],
-      ["Business Pack", "Featured", 2499, "🎁", "Convenient business pack"],
-      ["Quality Choice", "All", 749, "⭐", "Selected for quality"],
-      ["Fresh Arrival", "New", 1599, "✨", "Latest catalogue arrival"],
-      ["Special Deal", "Offers", 999, "🏷️", "Special offer item"],
-      ["Premium Collection", "Featured", 1899, "💎", "Premium selection"]
-    ];
-    let selected = "All", cart = [];
-
-    function render() {
-      let q = document.getElementById("q").value.toLowerCase();
-      let a = products.filter((p) =>
-        (selected === "All" || p[1] === selected) &&
-        (p[0].toLowerCase().includes(q) || p[4].toLowerCase().includes(q))
-      );
-      document.getElementById("grid").innerHTML = a.map((p) => {
-        let image = p[3].endsWith(".svg")
-          ? `<img src="${p[3]}" alt="${p[0]}">`
-          : `<span class="pic-emoji">${p[3]}</span>`;
-        return `<article class="product"><div class="pic">${image}</div><div class="body"><h3>${p[0]}</h3><p>${p[4]}</p><span class="price">₹${p[2].toLocaleString("en-IN")}</span><button class="btn" onclick="add('${p[0]}')">Add to Cart</button></div></article>`;
-      }).join("");
-    }
-
-    function add(name) {
-      let p = products.find((x) => x[0] === name);
-      cart.push(p);
-      document.getElementById("count").textContent = cart.length;
-      toast("Added to cart");
-    }
-
-    function openCart() {
-      document.getElementById("drawer").classList.add("open");
-      document.getElementById("shade").classList.add("show");
-      drawCart();
-    }
-
-    function closeCart() {
-      document.getElementById("drawer").classList.remove("open");
-      document.getElementById("shade").classList.remove("show");
-    }
-
-    function drawCart() {
-      document.getElementById("items").innerHTML = cart.length
-        ? cart.map((p, i) => {
-            let image = p[3].endsWith(".svg") ? "🧅" : p[3];
-            return `<div class="row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid #404040; padding-bottom:10px;">${image} <span>${p[0]} — ₹${p[2].toLocaleString("en-IN")} <button onclick="removeItem(${i})">×</button></span></div>`;
-          }).join("")
-        : "<p style='color:#aaa; text-align:center; margin-top:30px;'>Your cart is empty.</p>";
-      document.getElementById("total").textContent = cart.reduce((s, p) => s + p[2], 0).toLocaleString("en-IN");
-    }
-
-    function removeItem(index) {
-      cart.splice(index, 1);
-      document.getElementById("count").textContent = cart.length;
-      drawCart();
-    }
-
-    function checkout() {
-      toast(cart.length ? "Checkout demo ready — connect payment gateway." : "Add a product first");
-    }
-
-    function toast(t) {
-      let x = document.getElementById("toast");
-      x.textContent = t;
-      x.classList.add("show");
-      setTimeout(() => x.classList.remove("show"), 2500);
-    }
-
-    render();
-  </script>
+<header><div class="logo"><span class="logo-mark">ॐ</span><span>Shri Ganeshay Namah Store</span></div><button class="cart-btn" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button></header>
+<div id="shop"><input type="text" id="q" placeholder="Search Premium Products..." onkeyup="render()"><div id="grid"></div></div>
+<div id="drawer" class="drawer"><h3>Your Cart</h3><div id="items" style="flex-grow:1;overflow-y:auto;margin:20px 0"></div><p><b>Total: ₹<span id="total">0</span></b></p><button class="btn" onclick="checkout()" style="margin-bottom:15px;background:#34d399">Proceed to Checkout</button><button class="btn" onclick="closeCart()" style="background:#ef4444">Close Cart</button></div>
+<div id="shade" class="shade" onclick="closeCart()"></div><div id="toast"></div>
+<script>
+const chopperImage="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' rx='32' fill='%23f4eee3'/%3E%3Cellipse cx='400' cy='520' rx='270' ry='35' fill='%23d5d0c7' opacity='.55'/%3E%3Crect x='210' y='245' width='380' height='250' rx='55' fill='%23eef0f2' stroke='%237e8790' stroke-width='12'/%3E%3Crect x='248' y='290' width='304' height='170' rx='25' fill='%23fafafa' stroke='%239aa1a7' stroke-width='8'/%3E%3Crect x='300' y='150' width='200' height='150' rx='36' fill='%237cb342' stroke='%234d7f25' stroke-width='10'/%3E%3Crect x='355' y='105' width='90' height='90' rx='45' fill='%235e8f33'/%3E%3Crect x='385' y='55' width='30' height='100' rx='15' fill='%233d5a24' transform='rotate(-25 400 105)'/%3E%3Ccircle cx='330' cy='355' r='18' fill='%23f2a93b'/%3E%3Ccircle cx='390' cy='360' r='20' fill='%23f0c14b'/%3E%3Ccircle cx='450' cy='348' r='17' fill='%23b8d44a'/%3E%3Cpath d='M320 430c55-35 105-35 160 0' fill='none' stroke='%23c7ccd0' stroke-width='10' stroke-linecap='round'/%3E%3Ctext x='400' y='575' text-anchor='middle' font-family='Arial' font-size='32' font-weight='700' fill='%23333'%3EVegetable Push Chopper%3C/text%3E%3C/svg%3E";
+const products=[["Vegetable Push Chopper","New",499,chopperImage,"Easy manual vegetable chopper"],["Premium Product","Featured",1299,"📦","Quality catalogue item"],["Smart Home Essential","New",899,"🏠","Practical everyday product"],["Daily Use Collection","Offers",599,"🛍️","Great value selection"],["Business Pack","Featured",2499,"🎁","Convenient business pack"],["Quality Choice","All",749,"⭐","Selected for quality"],["Fresh Arrival","New",1599,"✨","Latest catalogue arrival"],["Special Deal","Offers",999,"🏷️","Special offer item"],["Premium Collection","Featured",1899,"💎","Premium selection"]];
+let cart=[];
+function render(){const q=document.getElementById("q").value.toLowerCase();const a=products.filter(p=>p[0].toLowerCase().includes(q)||p[4].toLowerCase().includes(q));document.getElementById("grid").innerHTML=a.map(p=>`<article class="product"><div class="pic">${p[3].startsWith("data:")?`<img src="${p[3]}" alt="${p[0]}">`:p[3]}</div><div class="body"><h3>${p[0]}</h3><p>${p[4]}</p><span class="price">₹${p[2].toLocaleString("en-IN")}</span><button class="btn" onclick="add('${p[0]}')">Add to Cart</button></div></article>`).join("")}
+function add(name){cart.push(products.find(p=>p[0]===name));document.getElementById("count").textContent=cart.length;toast("Added to cart");drawCart()}function openCart(){document.getElementById("drawer").classList.add("open");document.getElementById("shade").classList.add("show");drawCart()}function closeCart(){document.getElementById("drawer").classList.remove("open");document.getElementById("shade").classList.remove("show")}
+function drawCart(){document.getElementById("items").innerHTML=cart.length?cart.map((p,i)=>`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;border-bottom:1px solid #404040;padding-bottom:10px"><span>${p[0]}</span><span>₹${p[2].toLocaleString("en-IN")} <button onclick="removeItem(${i})">×</button></span></div>`).join(""):"<p style='color:#aaa;text-align:center;margin-top:30px'>Your cart is empty.</p>";document.getElementById("total").textContent=cart.reduce((s,p)=>s+p[2],0).toLocaleString("en-IN");document.getElementById("count").textContent=cart.length}
+function removeItem(i){cart.splice(i,1);drawCart()}function checkout(){toast(cart.length?"Checkout demo ready — connect payment gateway.":"Add a product first")}function toast(t){const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),2500)}render();
+</script>
 </body>
 </html>
