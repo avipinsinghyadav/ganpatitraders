@@ -5,324 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shri Ganeshay Namah Store - Premium Collection</title>
   <style>
-    /* Ekdum Premium Royal Background */
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(175deg, #1a1a1a 0%, #2d2d2d 50%, #404040 100%);
-      min-height: 100vh;
-      color: #e0e0e0;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      background: rgba(20, 20, 20, 0.95);
-      backdrop-filter: blur(15px);
-      box-shadow: 0 4px 25px rgba(0,0,0,0.5);
-      
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 2px solid #b59410; /* Rich Gold border */
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #ffd700; /* Premium Gold Text */
-      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-      letter-spacing: 1px;
-    }
-
-    .logo-container img {
-      width: 180px; /* Increased size for the banner */
-      height: 60px; /* Aspect ratio for header */
-      object-fit: cover; /* Important to crop nicely */
-      border-radius: 8px;
-      border: 2px solid #ffd700;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-    }
-
-    .cart-btn {
-      background: linear-gradient(45deg, #b59410, #ffd700);
-      color: #111;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 4px 15px rgba(181, 148, 16, 0.5);
-      font-size: 1.1rem;
-    }
-
-    .cart-btn:hover {
-      background: linear-gradient(45deg, #ffd700, #ffe066);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(181, 148, 16, 0.7);
-    }
-
-    #shop {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    #q {
-      padding: 14px 25px;
-      width: 100%;
-      max-width: 450px;
-      border: 2px solid #b59410;
-      border-radius: 30px;
-      outline: none;
-      box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);
-      font-size: 1.1rem;
-      background: #2a2a2a;
-      color: #fff;
-      margin-bottom: 30px;
-    }
-
-    #grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 25px;
-    }
-
-    .product {
-      background: #2a2a2a;
-      border: 1px solid #404040;
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .product:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 35px rgba(181, 148, 16, 0.15);
-      border-color: #b59410;
-    }
-
-    .pic {
-      font-size: 3.5rem;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
-    .body h3 {
-      margin: 0 0 10px 0;
-      font-size: 1.3rem;
-      color: #fff;
-    }
-
-    .body p {
-      margin: 0 0 15px 0;
-      font-size: 0.95rem;
-      color: #aaa;
-    }
-
-    .price {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #34d399; /* Premium Green */
-      display: block;
-      margin-bottom: 15px;
-    }
-
-    .btn {
-      background: #b59410; /* Gold Button */
-      color: #fff;
-      border: none;
-      padding: 12px;
-      border-radius: 12px;
-      width: 100%;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s;
-      font-size: 1.1rem;
-    }
-
-    .btn:hover {
-      background: #d4ae14;
-    }
-
-    .drawer {
-      position: fixed;
-      right: -350px;
-      top: 0;
-      width: 350px;
-      height: 100%;
-      background: #2a2a2a;
-      transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: -10px 0 40px rgba(0,0,0,0.5);
-      padding: 25px;
-      z-index: 1000;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      border-left: 2px solid #b59410;
-    }
-
-    .drawer.open { right: 0; }
-
-    .shade {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(5px);
-      display: none;
-      z-index: 999;
-    }
-
-    .shade.show { display: block; }
-
-    #toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: #ffd700;
-      color: #111;
-      padding: 15px 30px;
-      border-radius: 30px;
-      opacity: 0;
-      transition: 0.4s;
-      pointer-events: none;
-      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-
-    #toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
+    body{margin:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(175deg,#1a1a1a,#2d2d2d 50%,#404040);min-height:100vh;color:#e0e0e0}
+    header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:15px 30px;background:rgba(20,20,20,.95);box-shadow:0 4px 25px #0008;position:sticky;top:0;z-index:100;border-bottom:2px solid #b59410}
+    .logo-container{display:flex;align-items:center;gap:15px;font-size:1.35rem;font-weight:bold;color:#ffd700;letter-spacing:1px}
+    .logo-container img{width:180px;height:60px;object-fit:cover;border-radius:8px;border:2px solid #ffd700}
+    .cart-btn,.btn{border:0;border-radius:12px;padding:12px;cursor:pointer;font-weight:600;font-size:1rem}
+    .cart-btn{background:linear-gradient(45deg,#b59410,#ffd700);color:#111;padding:12px 24px;border-radius:30px;font-weight:bold}
+    #shop{padding:40px 20px;max-width:1200px;margin:auto}
+    #q{box-sizing:border-box;padding:14px 25px;width:100%;max-width:450px;border:2px solid #b59410;border-radius:30px;outline:none;font-size:1.1rem;background:#2a2a2a;color:#fff;margin-bottom:30px}
+    #grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:25px}
+    .product{background:#2a2a2a;border:1px solid #404040;padding:25px;border-radius:20px;box-shadow:0 10px 30px #0005;transition:.3s;display:flex;flex-direction:column;justify-content:space-between}
+    .product:hover{transform:translateY(-5px);border-color:#b59410}
+    .pic{text-align:center;font-size:3.5rem;margin-bottom:15px}
+    .body h3{margin:0 0 10px;color:#fff;font-size:1.3rem}.body p{margin:0 0 15px;color:#aaa}
+    .price{font-size:1.4rem;font-weight:bold;color:#34d399;display:block;margin-bottom:15px}
+    .btn{width:100%;background:#b59410;color:#fff;margin-top:8px;text-align:center;box-sizing:border-box;text-decoration:none;display:block}
+    .btn:hover{background:#d4ae14}.marketplaces{display:grid;grid-template-columns:1fr 1fr;gap:8px}.marketplaces .btn{font-size:.9rem;padding:10px 6px}.amazon{background:#ff9900;color:#111}.flipkart{background:#2874f0;color:#fff}
+    .drawer{position:fixed;right:-350px;top:0;width:min(350px,100%);height:100%;background:#2a2a2a;transition:.4s;box-shadow:-10px 0 40px #0008;padding:25px;z-index:1000;box-sizing:border-box;display:flex;flex-direction:column;border-left:2px solid #b59410}
+    .drawer.open{right:0}.shade{position:fixed;inset:0;background:#000b;display:none;z-index:999}.shade.show{display:block}
+    #toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#ffd700;color:#111;padding:15px 30px;border-radius:30px;opacity:0;transition:.4s;pointer-events:none;z-index:1100;font-weight:bold}
+    #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+    @media(max-width:600px){header{padding:12px;flex-wrap:wrap}.logo-container{font-size:1rem}.logo-container img{width:90px;height:42px}#shop{padding:25px 14px}}
   </style>
 </head>
 <body>
-
-  <!-- Header with Premium Ganpati Ji Photo -->
   <header>
-    <div class="logo-container">
-      <img src="image_1.png" alt="Ganpati Ji Premium">
-      <span>Shri Ganeshay Namah Store</span>
-    </div>
-    <div>
-      <button class="cart-btn" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button>
-    </div>
+    <div class="logo-container"><img src="image_1.png" alt="Ganpati Ji Premium"><span>Shri Ganeshay Namah Store</span></div>
+    <button class="cart-btn" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button>
   </header>
-
-  <!-- Shop Section -->
-  <div id="shop">
-    <input type="text" id="q" placeholder="Search Premium Products..." onkeyup="render()">
+  <main id="shop">
+    <input type="text" id="q" placeholder="Search Premium Products..." oninput="render()" aria-label="Search products">
     <div id="grid"></div>
-  </div>
-
-  <!-- Cart Drawer -->
-  <div id="drawer" class="drawer">
+  </main>
+  <aside id="drawer" class="drawer" aria-label="Shopping cart">
     <h3>Your Cart</h3>
-    <div id="items" style="flex-grow: 1; overflow-y: auto; margin: 20px 0;"></div>
-    <p style="font-size: 1.2rem;"><b>Total: ₹<span id="total">0</span></b></p>
-    <button class="btn" onclick="checkout()" style="margin-bottom: 15px; background: #34d399;">Proceed to Checkout</button>
-    <button class="btn" onclick="closeCart()" style="background: #ef4444;">Close Cart</button>
-  </div>
+    <div id="items" style="flex-grow:1;overflow-y:auto;margin:20px 0"></div>
+    <p style="font-size:1.2rem"><b>Total: ₹<span id="total">0</span></b></p>
+    <button class="btn" onclick="checkout()" style="background:#34d399">Proceed to Checkout</button>
+    <button class="btn" onclick="closeCart()" style="background:#ef4444">Close Cart</button>
+  </aside>
   <div id="shade" class="shade" onclick="closeCart()"></div>
-
-  <!-- Toast Notification -->
-  <div id="toast"></div>
-
+  <div id="toast" role="status"></div>
   <script>
     const products = [
-      ["Vegetable Push Chopper", "New", 499, "🧅", "Easy manual vegetable chopper"],
-      ["Premium Product", "Featured", 1299, "📦", "Quality catalogue item"],
-      ["Smart Home Essential", "New", 899, "🏠", "Practical everyday product"],
-      ["Daily Use Collection", "Offers", 599, "🛍️", "Great value selection"],
-      ["Business Pack", "Featured", 2499, "🎁", "Convenient business pack"],
-      ["Quality Choice", "All", 749, "⭐", "Selected for quality"],
-      ["Fresh Arrival", "New", 1599, "✨", "Latest catalogue arrival"],
-      ["Special Deal", "Offers", 999, "🏷️", "Special offer item"],
-      ["Premium Collection", "Featured", 1899, "💎", "Premium selection"],
+      {name:"Vegetable Push Chopper", category:"New", price:499, icon:"🧅", description:"Easy manual vegetable chopper", marketplaces:true},
+      {name:"Premium Product", category:"Featured", price:1299, icon:"📦", description:"Quality catalogue item"},
+      {name:"Smart Home Essential", category:"New", price:899, icon:"🏠", description:"Practical everyday product"},
+      {name:"Daily Use Collection", category:"Offers", price:599, icon:"🛍️", description:"Great value selection"},
+      {name:"Business Pack", category:"Featured", price:2499, icon:"🎁", description:"Convenient business pack"},
+      {name:"Quality Choice", category:"All", price:749, icon:"⭐", description:"Selected for quality"},
+      {name:"Fresh Arrival", category:"New", price:1599, icon:"✨", description:"Latest catalogue arrival"},
+      {name:"Special Deal", category:"Offers", price:999, icon:"🏷️", description:"Special offer item"},
+      {name:"Premium Collection", category:"Featured", price:1899, icon:"💎", description:"Premium selection"}
     ];
-    let selected = "All",
-      cart = [];
-
-    function render() {
-      let q = document.getElementById("q").value.toLowerCase();
-      let a = products.filter(
-        (p) =>
-          (selected === "All" || p[1] === selected) &&
-          (p[0].toLowerCase().includes(q) || p[4].toLowerCase().includes(q))
-      );
-      document.getElementById("grid").innerHTML = a
-        .map(
-          (p) =>
-            `<article class="product"><div class="pic">${ p[3] }</div><div class="body"><h3>${p[0]}</h3><p>${ p[4] }</p><span class="price">₹${p[2].toLocaleString( "en-IN" )}</span><button class="btn" onclick="add('${ p[0] }')">Add to Cart</button></div></article>`
-        )
-        .join("");
+    let cart=[];
+    function render(){
+      const query=document.getElementById("q").value.toLowerCase();
+      const matches=products.filter(p=>p.name.toLowerCase().includes(query)||p.description.toLowerCase().includes(query));
+      document.getElementById("grid").innerHTML=matches.map(p=>`<article class="product"><div><div class="pic">${p.icon}</div><div class="body"><h3>${p.name}</h3><p>${p.description}</p><span class="price">₹${p.price.toLocaleString("en-IN")}</span></div></div><div><button class="btn" onclick="add('${p.name}')">Add to Cart</button>${p.marketplaces?'<div class="marketplaces"><a class="btn amazon" href="https://www.amazon.in/s?k=vegetable+push+chopper" target="_blank" rel="noopener noreferrer">View on Amazon</a><a class="btn flipkart" href="https://www.flipkart.com/search?q=vegetable%20push%20chopper" target="_blank" rel="noopener noreferrer">View on Flipkart</a></div>':''}</div></article>`).join("");
     }
-
-    function cat(x) {
-      selected = x;
-      render();
-      document.getElementById("shop").scrollIntoView({ behavior: "smooth" });
-    }
-
-    function add(name) {
-      let p = products.find((x) => x[0] === name);
-      cart.push(p);
-      document.getElementById("count").textContent = cart.length;
-      toast("Added to cart");
-    }
-
-    function openCart() {
-      document.getElementById("drawer").classList.add("open");
-      document.getElementById("shade").classList.add("show");
-      drawCart();
-    }
-
-    function closeCart() {
-      document.getElementById("drawer").classList.remove("open");
-      document.getElementById("shade").classList.remove("show");
-    }
-
-    function drawCart() {
-      document.getElementById("items").innerHTML = cart.length
-        ? cart
-            .map(
-              (p, i) =>
-                `<div class="row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid #404040; padding-bottom:10px;">${p[3]} <span style="flex-grow:1; margin-left:15px; color: #fff;">${ p[0] }<br><b style='color: #34d399;'>₹${p[2].toLocaleString( "en-IN" )}</b></span><button onclick="cart.splice(${i},1);drawCart();document.getElementById('count').textContent=cart.length" style="background:#500; color:#ff6b6b; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-weight: bold;">×</button></div>`
-            )
-            .join("")
-        : "<p style='color:#aaa; text-align:center; margin-top: 30px;'>Your cart is empty.</p>";
-      document.getElementById("total").textContent = cart
-        .reduce((s, p) => s + p[2], 0)
-        .toLocaleString("en-IN");
-    }
-
-    function checkout() {
-      toast(
-        cart.length
-          ? "Checkout demo ready — connect payment gateway."
-          : "Add a product first"
-      );
-    }
-
-    function toast(t) {
-      let x = document.getElementById("toast");
-      x.textContent = t;
-      x.classList.add("show");
-      setTimeout(() => x.classList.remove("show"), 2500);
-    }
-
+    function add(name){const product=products.find(p=>p.name===name);if(!product)return;cart.push(product);document.getElementById("count").textContent=cart.length;toast("Added to cart");}
+    function openCart(){document.getElementById("drawer").classList.add("open");document.getElementById("shade").classList.add("show");drawCart();}
+    function closeCart(){document.getElementById("drawer").classList.remove("open");document.getElementById("shade").classList.remove("show");}
+    function drawCart(){document.getElementById("items").innerHTML=cart.length?cart.map((p,i)=>`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;border-bottom:1px solid #404040;padding-bottom:10px">${p.icon} ${p.name} <span>₹${p.price.toLocaleString("en-IN")} <button onclick="removeItem(${i})" aria-label="Remove ${p.name}">×</button></span></div>`).join(""):"<p style='color:#aaa;text-align:center;margin-top:30px'>Your cart is empty.</p>";document.getElementById("total").textContent=cart.reduce((sum,p)=>sum+p.price,0).toLocaleString("en-IN");}
+    function removeItem(index){cart.splice(index,1);document.getElementById("count").textContent=cart.length;drawCart();}
+    function checkout(){toast(cart.length?"Checkout demo ready — connect payment gateway.":"Add a product first");}
+    function toast(message){const element=document.getElementById("toast");element.textContent=message;element.classList.add("show");setTimeout(()=>element.classList.remove("show"),2500);}
     render();
   </script>
 </body>
