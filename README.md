@@ -16,11 +16,11 @@
     #grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:25px}
     .product{background:#2a2a2a;border:1px solid #404040;padding:25px;border-radius:20px;box-shadow:0 10px 30px #0005;transition:.3s;display:flex;flex-direction:column;justify-content:space-between}
     .product:hover{transform:translateY(-5px);border-color:#b59410}
-    .pic{text-align:center;font-size:3.5rem;margin-bottom:15px}
+    .pic{text-align:center;font-size:3.5rem;margin-bottom:15px;height:180px;display:flex;align-items:center;justify-content:center}
+    .pic img{width:100%;height:180px;object-fit:cover;border-radius:12px}
     .body h3{margin:0 0 10px;color:#fff;font-size:1.3rem}.body p{margin:0 0 15px;color:#aaa}
     .price{font-size:1.4rem;font-weight:bold;color:#34d399;display:block;margin-bottom:15px}
-    .btn{width:100%;background:#b59410;color:#fff;margin-top:8px;text-align:center;box-sizing:border-box;text-decoration:none;display:block}
-    .btn:hover{background:#d4ae14}.marketplaces{display:grid;grid-template-columns:1fr 1fr;gap:8px}.marketplaces .btn{font-size:.9rem;padding:10px 6px}.amazon{background:#ff9900;color:#111}.flipkart{background:#2874f0;color:#fff}
+    .btn{width:100%;background:#b59410;color:#fff;margin-top:8px;text-align:center;box-sizing:border-box;text-decoration:none;display:block}.btn:hover{background:#d4ae14}
     .drawer{position:fixed;right:-350px;top:0;width:min(350px,100%);height:100%;background:#2a2a2a;transition:.4s;box-shadow:-10px 0 40px #0008;padding:25px;z-index:1000;box-sizing:border-box;display:flex;flex-direction:column;border-left:2px solid #b59410}
     .drawer.open{right:0}.shade{position:fixed;inset:0;background:#000b;display:none;z-index:999}.shade.show{display:block}
     #toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#ffd700;color:#111;padding:15px 30px;border-radius:30px;opacity:0;transition:.4s;pointer-events:none;z-index:1100;font-weight:bold}
@@ -48,7 +48,7 @@
   <div id="toast" role="status"></div>
   <script>
     const products = [
-      {name:"Vegetable Push Chopper", category:"New", price:499, icon:"🧅", description:"Easy manual vegetable chopper", marketplaces:true},
+      {name:"Vegetable Push Chopper", category:"New", price:499, icon:"🧅", image:"https://images.pexels.com/photos/4613825/pexels-photo-4613825.jpeg", description:"Easy manual vegetable chopper"},
       {name:"Premium Product", category:"Featured", price:1299, icon:"📦", description:"Quality catalogue item"},
       {name:"Smart Home Essential", category:"New", price:899, icon:"🏠", description:"Practical everyday product"},
       {name:"Daily Use Collection", category:"Offers", price:599, icon:"🛍️", description:"Great value selection"},
@@ -62,7 +62,7 @@
     function render(){
       const query=document.getElementById("q").value.toLowerCase();
       const matches=products.filter(p=>p.name.toLowerCase().includes(query)||p.description.toLowerCase().includes(query));
-      document.getElementById("grid").innerHTML=matches.map(p=>`<article class="product"><div><div class="pic">${p.icon}</div><div class="body"><h3>${p.name}</h3><p>${p.description}</p><span class="price">₹${p.price.toLocaleString("en-IN")}</span></div></div><div><button class="btn" onclick="add('${p.name}')">Add to Cart</button>${p.marketplaces?'<div class="marketplaces"><a class="btn amazon" href="https://www.amazon.in/s?k=vegetable+push+chopper" target="_blank" rel="noopener noreferrer">View on Amazon</a><a class="btn flipkart" href="https://www.flipkart.com/search?q=vegetable%20push%20chopper" target="_blank" rel="noopener noreferrer">View on Flipkart</a></div>':''}</div></article>`).join("");
+      document.getElementById("grid").innerHTML=matches.map(p=>{const picture=p.image?`<img src="${p.image}" alt="${p.name}">`:p.icon;return `<article class="product"><div><div class="pic">${picture}</div><div class="body"><h3>${p.name}</h3><p>${p.description}</p><span class="price">₹${p.price.toLocaleString("en-IN")}</span></div></div><button class="btn" onclick="add('${p.name}')">Add to Cart</button></article>`}).join("");
     }
     function add(name){const product=products.find(p=>p.name===name);if(!product)return;cart.push(product);document.getElementById("count").textContent=cart.length;toast("Added to cart");}
     function openCart(){document.getElementById("drawer").classList.add("open");document.getElementById("shade").classList.add("show");drawCart();}
